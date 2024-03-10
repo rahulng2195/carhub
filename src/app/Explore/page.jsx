@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import sliderImg from '../carData';
 
 const Explore = () => {
@@ -15,8 +15,8 @@ const Explore = () => {
                 <div className='col-md-3 my-3' key={item.key}>
                   <div className='bg-slate-200 shadow-md border-spacing-1 rounded-lg p-3'>
                     <div className="car_img">
-                    <img src={item.image} alt={item.alt} className='md:w-100 md:h-100  md:object-cover object-contain'/>
-                      {/* <Image src={item.image} alt={item.alt} width={100} height={100} layout='responsive' objectFit='contain' /> */}
+                    {/* <img src={item.image} alt={item.alt} className='md:w-100 md:h-100  md:object-cover object-contain'/> */}
+                      <Image src={item.image} alt={item.alt} width={100} height={100} layout='responsive' objectFit='contain' />
                     </div>
                     <div className='car_title'>
                       <h5 className='text-center text-black pt-3'>{item.name}</h5>

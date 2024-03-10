@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from "react";
-
 import Navbar from "./Navbar/page";
 import Footer from "./Footer/page";
 

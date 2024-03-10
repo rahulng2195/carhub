@@ -31,7 +31,7 @@ const sliderImg = [
 },
 {
   key: 7,
-  image: '/Assets/Images/bmw_x4.jpg',
+  image: '/Assets/Images/1D80H2L509599_16884_ff2d07075a92a66220803687e71dae6f_669_033e1b3018f499fcfad3dcaa1c71d080.webp',
   name: 'BMW',
   alt: 'img1',
 },
@@ -83,7 +83,7 @@ const FilterCar = [
 },
 {
   key: 4,
-  image: '/Assets/Images/00_6be87b06927f1ce6c9b2d5754c284c87_136400_0697cf4a3bed3ef5760372b3ec121a0f.jpg',
+  image: '/Assets/Images/7NHVYIAKI5XBPZVXTIZM5BLHIY-cr-540.jpg',
   name: 'BMW4',
   alt: 'img4',
 },
@@ -101,7 +101,7 @@ const FilterCar = [
 },
 {
   key: 8,
-  image: '/Assets/Images/1D80H2L509599_16884_ff2d07075a92a66220803687e71dae6f_669_033e1b3018f499fcfad3dcaa1c71d080.jpg',
+  image: '/Assets/Images/6DbWDFPlLNXlnZaHvcIaoOgzjS4.jpg',
   name: 'BMW7',
   alt: 'img2',
 },

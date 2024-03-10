@@ -3,10 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import Filter from '@/Components/Filter/Filter'
 import LeftSideBar from '@/Components/LeftSideBar/LeftSideBar'
 import '../../Components/Banner/bannerForm.css';
-// import 'jquery-nice-select/css/nice-select.css';
-// import 'jquery-nice-select/js/jquery.nice-select';
-
-import $ from 'jquery';
+import MobileNav from '@/Components/MobileNav/MobileNav';
 
 const CarList = () => {
   // const selectRef = useRef(null);
@@ -22,9 +19,9 @@ const CarList = () => {
       <div className="widget-banner-car-listing banner-car-listing-list mb-16">
         <div className="themesflat-container full">
           <div className="banner-car-listing">
-            <span className="sub-title">Save up to 15%</span>
+            {/* <span className="sub-title">Save up to 15%</span> */}
             <h1 className="title text-white">
-              Autohix <span className="text-red">Rental</span> Car
+              CarHub <span className="text-red">Result</span>
             </h1>
           </div>
         </div>
@@ -34,11 +31,11 @@ const CarList = () => {
         <div className="themesflat-container">
           <div className="row car-listing-list">
             <LeftSideBar/>
-            <Filter/>
+            <Filter />
           </div>
         </div>
       </div>
-
+     <MobileNav/> 
     </section>
     // </main>
   )

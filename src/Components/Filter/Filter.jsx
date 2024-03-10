@@ -1,8 +1,17 @@
-import React from 'react'
-
+'use client'
+import React, {useEffect} from 'react'
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {FilterCar} from '@/app/carData'
+import Image from 'next/image'
+import { faHeart, faStar, faGasPump, faMeteor, faGears, faList, faGripVertical } from '@fortawesome/free-solid-svg-icons';
+import onClickViewListingType from '@/app/main'
 
 function Filter() {
+  // grid system on click 
+  useEffect(() => {
+    onClickViewListingType()
+  }, []);
   return (
     <>
       <div className="col-md-12 col-lg-9 listing-list-car-wrap">
@@ -15,19 +24,13 @@ function Filter() {
             </div>
             <div className="col-md-6 toolbar-search-list">
               <div className="group-select-recently">
-                <div className="nice-select" tabIndex={0}>
-                  <span className="current">Recently Added</span>
-                  <ul className="list">
-                    <li data-value="" className="option selected">
-                      Recently Added
-                    </li>
-                    <li data-value="new" className="option">
-                      New
-                    </li>
-                    <li data-value="Recently Added" className="option">
-                      Recently Added
-                    </li>
-                  </ul>
+                <div className="nice-select text-left">
+                  <span className="current">Sort By:</span>
+                  <select className='form-select mt-2' name='search_fil'>
+                      <option> Recently Added</option>
+                      <option> New</option>
+                      <option> Recently Added</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -44,9 +47,9 @@ function Filter() {
                   aria-controls="all"
                   aria-selected="true"
                 >
-                  All <span className="number-list">(100)</span>
+                  Result Found Any/Model
                 </a>
-                <a
+                {/* <a
                   className=" btn-condition-filter"
                   id="new-tab"
                   data-bs-toggle="tab"
@@ -67,18 +70,21 @@ function Filter() {
                   aria-selected="false"
                 >
                   Used <span className="number-list">(29)</span>
-                </a>
+                </a> */}
               </div>
             </div>
             <div className="toolbar-list">
               <div className="form-group">
                 <a className="btn-display-listing-grid active">
                   <i className="fa-regular fa-heart"></i>
+                  <FontAwesomeIcon icon={faList} className="coffee-icon"/> 
                 </a>
               </div>
               <div className="form-group">
                 <a className="btn-display-listing-list">
-                  <i className="fa-regular fa-heart"></i>
+                  {/* <i className="fa-regular fa-heart"></i> */}
+                  <FontAwesomeIcon icon={faGripVertical} className="coffee-icon"/> 
+
                 </a>
               </div>
             </div>
@@ -105,10 +111,14 @@ function Filter() {
                         title="Lexus LC Hybrid 2024"
                       >
                         <div className="images">
-                          <img
+                          <Image
                             src={val.image}
                             className="swiper-image tfcl-light-gallery"
                             alt="images"
+                            height={100}
+                            width={100}
+                            layout='responsive'
+                            objectFit='contain'
                           />
                         </div>
                       </div>
@@ -153,8 +163,9 @@ function Filter() {
                   </div>
                   <a href="#" className="icon-favorite">
                     <i className="fa-regular fa-heart"></i>
+                    <FontAwesomeIcon icon={faHeart} className="heart-icon"/> 
                   </a>
-                  <span className="feature">Featured</span>
+                  <span className="feature">Dealer Name</span>
                 </div>
                 <div className="listing-item-content">
                   <div className="listing-top-content">
@@ -164,32 +175,34 @@ function Filter() {
                     </h6>
                     <div className="review-wrap">
                       <div className="rating">
-                        <i className="icon-Vector3" />
-                        <i className="icon-Vector3" />
-                        <i className="icon-Vector3" />
-                        <i className="icon-Vector3" />
-                        <i className="icon-Vector3" />
+                        <FontAwesomeIcon icon={faStar} className="Star"/> 
+                        <FontAwesomeIcon icon={faStar} className="Star"/> 
+                        <FontAwesomeIcon icon={faStar} className="Star"/> 
+                        <FontAwesomeIcon icon={faStar} className="Star"/> 
+                        <FontAwesomeIcon icon={faStar} className="Star"/> 
                       </div>
-                      <span className="review">( 2 Reviews )</span>
+                      <span className="review">( 5 Reviews )</span>
                     </div>
                     <div className="description">
                       <ul>
                         <li className="listing-information fuel">
-                          <i className="icon-gasoline-pump-1" />
+                          <FontAwesomeIcon icon={faGasPump} className="Star"/> 
                           <div className="inner">
                             <span>Fuel type</span>
                             <p>Petrol</p>
                           </div>
                         </li>
                         <li className="listing-information size-engine">
-                          <i className="icon-Group1" />
+                        <FontAwesomeIcon icon={faMeteor} className="Star"/> 
+
                           <div className="inner">
                             <span>Mileage</span>
                             <p>90 k.m</p>
                           </div>
                         </li>
                         <li className="listing-information transmission">
-                          <i className="icon-gearbox-1" />
+                        <FontAwesomeIcon icon={faGears} className="Star"/> 
+                          {/* <i className="icon-gearbox-1" /> */}
                           <div className="inner">
                             <span>Transmission</span>
                             <p>Auto</p>

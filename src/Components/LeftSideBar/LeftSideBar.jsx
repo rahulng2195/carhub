@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 
 import Link from 'next/link'
@@ -6,7 +6,8 @@ import Link from 'next/link'
 import Accordion from 'react-bootstrap/Accordion';
 
 const LeftSideBar = () => {
-  const [isChecked, setChecked] =  useState(true)
+  const [isChecked, setChecked] = useState(true)
+  // const [isOpen, setIsOpen] = useState(false);
   const Cararr = [
     {
       key: 1,
@@ -49,6 +50,11 @@ const LeftSideBar = () => {
       image: '/Assets/Images/cm-logo.70c5d1e4.png'
     },
   ]
+
+
+  // const toggleAccordion = () => {
+  //   setIsOpen(!isOpen);
+  // };
   return (
     <>
       {/* <div className='leftsidebar'>
@@ -87,7 +93,7 @@ const LeftSideBar = () => {
        </div>   
     </div> */}
 
-      <div className="col-md-12 col-lg-3">
+      <div className="col-md-12 col-lg-3 bg-slate-400 shadow-md rounded-md border-red-200 py-3 md:block hidden">
         <div className="accordion" id="accordionExample">
           <div className="accordion-item">
             <h2 className="accordion-header" id="headingOne">
@@ -107,7 +113,7 @@ const LeftSideBar = () => {
             </h2>
             <div
               id="collapseOne"
-              className="accordion-collapse show"
+              className='accordion-collapse show'
               aria-labelledby="headingOne"
               data-bs-parent="#accordionExample"
             >
@@ -204,8 +210,8 @@ const LeftSideBar = () => {
         </div>
 
 
-
-        <div className='bg-white my-3 shadow-md border-spacing-2 rounded-lg '>
+        {/* refine filter  */}
+        <div className='bg-white my-3 shadow-md border-spacing-2 rounded-lg p-2 border-8 border-sky-500'>
           <div className='sidebar-head text-center text-black'>
             <p className='text-black font-bold pt-5 text-lg'>Filter Cars</p>
           </div>
@@ -379,7 +385,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="disabledSelect" className="form-label">
-                    Sale Type
+                      Sale Type
                     </label>
                     <div className="form-check">
                       <input
@@ -422,7 +428,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="body_style" className="form-label">
-                    Body Style
+                      Body Style
                     </label>
                     <select id="body_style" className="form-select">
                       <option>Disabled select</option>
@@ -432,7 +438,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="drive_type" className="form-label">
-                    Drive Type
+                      Drive Type
                     </label>
                     <select id="drive_type" className="form-select">
                       <option>Disabled select</option>
@@ -442,7 +448,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="color" className="form-label">
-                    Exterior Color
+                      Exterior Color
                     </label>
                     <select id="color" className="form-select">
                       <option>Disabled select</option>
@@ -452,7 +458,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="icolor" className="form-label">
-                    Interior Color
+                      Interior Color
                     </label>
                     <select id="icolor" className="form-select">
                       <option>Disabled select</option>
@@ -462,7 +468,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="Doors" className="form-label">
-                    Doors
+                      Doors
                     </label>
                     <select id="Doors" className="form-select">
                       <option>Disabled select</option>
@@ -472,7 +478,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="Cylinders" className="form-label">
-                    Cylinders
+                      Cylinders
                     </label>
                     <select id="Cylinders" className="form-select">
                       <option>Disabled select</option>
@@ -482,7 +488,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="Title" className="form-label">
-                    Title
+                      Title
                     </label>
                     <select id="Title" className="form-select">
                       <option>Disabled select</option>
@@ -492,7 +498,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="disabledSelect" className="form-label">
-                    For Sale By
+                      For Sale By
                     </label>
                     <div className="form-check">
                       <input
@@ -535,7 +541,7 @@ const LeftSideBar = () => {
                 <div className="col-12">
                   <div className="form-group my-2">
                     <label htmlFor="Keywords" className="form-label">
-                    Keywords 
+                      Keywords
                     </label>
                     <select id="Keywords" className="form-select">
                       <option>Disabled select</option>
@@ -560,6 +566,50 @@ const LeftSideBar = () => {
 
             </form>
           </div>
+        </div>
+        {/* new car  */}
+        <div className='bg-white my-3 shadow-md border-spacing-2 rounded-lg p-2 border-8 border-sky-500'>
+          <div className='sidebar-head text-center text-black'>
+            <p className='text-black font-bold pt-5 text-lg'>New Cars</p>
+          </div>
+          <span>Select options and see pricing on new vehicles from nearby dealers.</span>
+          <form>
+            <div className='row'>
+              <div className="col-12">
+                <div className="form-group my-2">
+                  <label htmlFor="Make" className="form-label">
+                    Make
+                  </label>
+                  <select id="Make" className="form-select">
+                    <option>Disabled select</option>
+                  </select>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="form-group my-2">
+                  <label htmlFor="Model" className="form-label">
+                    Model
+                  </label>
+                  <select id="Model" className="form-select">
+                    <option>Disabled select</option>
+                  </select>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="form-group my-2">
+                  <label htmlFor="Model" className="form-label">
+                    Zip*
+                  </label>
+                  <input className='form-control' type='text' name='zip' placeholder='400098' />
+                </div>
+              </div>
+              <div className='flex'>
+              <button className='bg-orange-400 rounded-md text-white p-2 m-2 hover:text-black hover:bg-white hover:rounded-md hover:border-2 hover:border-sky-500 hover:shadow-md'>Submit</button>
+
+              </div>
+            </div>
+          </form>
+
         </div>
       </div>
     </>

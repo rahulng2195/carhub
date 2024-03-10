@@ -10,6 +10,7 @@ import 'swiper/css/pagination';
 import { FreeMode, Pagination } from 'swiper/modules';
 import Image from 'next/legacy/image';
 import sliderImg from '../carData';
+import Link from 'next/link';
 
 
 export default function CarSlider() {
@@ -21,7 +22,7 @@ export default function CarSlider() {
           <Swiper
             slidesPerView={6}
             spaceBetween={30}
-            loop={true}
+            loop={true} // Enable loop mode
             freeMode={true}
             autoplay={{
               delay: 2000,
@@ -33,9 +34,9 @@ export default function CarSlider() {
             }}
             modules={[FreeMode, Pagination]}
             className="mySwiper"
-            responsive={{
+            breakpoints={{
               0: {
-                slidesPerView: 1,
+                slidesPerView: 2,
               },
               576: {
                 slidesPerView: 3,
@@ -53,14 +54,18 @@ export default function CarSlider() {
               sliderImg.map(item => (
                 <SwiperSlide key={item.key}>
                   {/* <img src={item.image} alt={item.alt} /> */}
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    height={100}
-                    width={100}
-                    layout='responsive'
-                    objectFit='contain'
-                  />
+                  <Link href="/CarList">
+                    {/* <a> */}
+                      <Image
+                        src={item.image}
+                        alt={item.alt}
+                        height={100}
+                        width={100}
+                        layout='responsive'
+                        objectFit='contain'
+                      />
+                    {/* </a> */}
+                  </Link>
                 </SwiperSlide>
               ))
             }

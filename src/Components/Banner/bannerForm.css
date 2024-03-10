@@ -179,7 +179,7 @@ input[type=radio] {
 }
 
 input[type=text]{
-  padding: .375rem 2.25rem .375rem .75rem !important;
+  padding: .375rem  !important;
 }
 
 input[type=search] {
@@ -6113,7 +6113,7 @@ ul.social-icon li a i:hover {
 /*------------ Widget mobie-app ---------------- */
 /*------------ Widget search-car ---------------- */
 .widget-search-car {
-  position: absolute;
+  /* position: absolute; */
   z-index: 1;
   top: 62%;
   bottom: 0;
@@ -6977,7 +6977,7 @@ a.mapboxgl-ctrl-logo {
   cursor: pointer;
   z-index: 6;
 }
-.listing-grid-item .listing-item-image .icon-favorite i {
+.listing-grid-item .listing-item-image .icon-favorite svg{
   display: inline-block;
   background-color: #ffffff;
   padding: 14px;
@@ -6985,7 +6985,7 @@ a.mapboxgl-ctrl-logo {
   color: #000000;
   font-size: 14px;
 }
-.listing-grid-item .listing-item-image .icon-favorite i:hover {
+.listing-grid-item .listing-item-image .icon-favorite svg:hover {
   background-color: #D01818;
   color: #ffffff;
 }
@@ -7017,7 +7017,7 @@ a.mapboxgl-ctrl-logo {
   gap: 10px;
   margin-bottom: 10px;
 }
-.listing-grid-item .listing-item-content .review-wrap .rating i {
+.listing-grid-item .listing-item-content .review-wrap .rating svg {
   color: #FFB41B;
 }
 .listing-grid-item .listing-item-content .review-wrap .review {
