@@ -27,7 +27,7 @@ export default function Navbar() {
         >
           <div className="flex lg:flex-1 md:flex-1 flex-1 justify-center">
             <a href="/" className="-m-1.5 p-1.5">
-              <h4 className={`${isScrolled ? 'text-black' : 'text-white'}`}>CarHub</h4>
+              <h4 className={`${isScrolled ? 'text-black' : 'text-white'} uppercase`}>CarHub</h4>
               {/* <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"

@@ -1,2 +1,38 @@
-Functionality:
-  - show 
+code Requirement:
+  - jsx
+  - slugs
+  - redux
+  - asios
+  - api
+  - mysql
+
+
+
+Current positions:
+Home Page: 
+  - nav - done
+  - Banner - done
+  - form search 
+    - dynamic inputs - pending
+    - search redirection logic - pending
+  - car slider - done
+    - dynamic slider - pending
+  - explore car
+    - dynamic car - pending
+  - footer design - done
+    - redirection - pending
+
+Filter page: 
+  - left sidebar design - done
+    - scroller - pending   
+    - dynamic inputs - pending
+    - form validation - pending
+    - on submit Functionality - pending
+
+  - filter car design - done
+    - add short desc - Done
+    - add content as per ref - done
+    - redirection on click - done
+    - dynamic car - pending
+
+  

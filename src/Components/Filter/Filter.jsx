@@ -1,11 +1,12 @@
 'use client'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {FilterCar} from '@/app/carData'
+import { FilterCar } from '@/app/carData'
 import Image from 'next/image'
 import { faHeart, faStar, faGasPump, faMeteor, faGears, faList, faGripVertical } from '@fortawesome/free-solid-svg-icons';
 import onClickViewListingType from '@/app/main'
+import CarCard from '../CarCard/CarCard';
 
 function Filter() {
   // grid system on click 
@@ -27,9 +28,9 @@ function Filter() {
                 <div className="nice-select text-left">
                   <span className="current">Sort By:</span>
                   <select className='form-select mt-2' name='search_fil'>
-                      <option> Recently Added</option>
-                      <option> New</option>
-                      <option> Recently Added</option>
+                    <option> Recently Added</option>
+                    <option> New</option>
+                    <option> Recently Added</option>
                   </select>
                 </div>
               </div>
@@ -77,13 +78,13 @@ function Filter() {
               <div className="form-group">
                 <a className="btn-display-listing-grid active">
                   <i className="fa-regular fa-heart"></i>
-                  <FontAwesomeIcon icon={faList} className="coffee-icon"/> 
+                  <FontAwesomeIcon icon={faList} className="coffee-icon" />
                 </a>
               </div>
               <div className="form-group">
                 <a className="btn-display-listing-list">
                   {/* <i className="fa-regular fa-heart"></i> */}
-                  <FontAwesomeIcon icon={faGripVertical} className="coffee-icon"/> 
+                  <FontAwesomeIcon icon={faGripVertical} className="coffee-icon" />
 
                 </a>
               </div>
@@ -98,151 +99,14 @@ function Filter() {
             aria-labelledby="all-tab"
             tabIndex={0}
           >
-            <div className="listing-list-car-grid ">
-            {
-              FilterCar.map(val => (
-                <div className="listing-grid-item" key={val.key}>
+            <div className="listing-list-car-grid">
+              {
+                FilterCar.map(val => (
+                  <CarCard key={val.key} value={val}/>
+                ))
+              }
 
-                <div className="listing-item-image">
-                  <div className="hover-listing-image">
-                    <div className="wrap-hover-listing">
-                      <div
-                        className="listing-item active"
-                        title="Lexus LC Hybrid 2024"
-                      >
-                        <div className="images">
-                          <Image
-                            src={val.image}
-                            className="swiper-image tfcl-light-gallery"
-                            alt="images"
-                            height={100}
-                            width={100}
-                            layout='responsive'
-                            objectFit='contain'
-                          />
-                        </div>
-                      </div>
-                      {/* <div
-                        className="listing-item"
-                        title="Lexus LC Hybrid 2024"
-                      >
-                        <div className="images">
-                          <img
-                            src={val.image}
-                            className="swiper-image lazy tfcl-light-gallery"
-                            alt="images"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        className="listing-item view-gallery"
-                        title="Lexus LC Hybrid 2024"
-                      >
-                        <div className="images">
-                          <img
-                            src={val.image}
-                            className="swiper-image tfcl-light-gallery"
-                            alt="images"
-                          />
-                          <div className="overlay-limit">
-                            <img
-                              src={val.image}
-                              className="icon-img"
-                              alt="icon-map"
-                            />
-                            <p>2 more photos</p>
-                          </div>
-                        </div>
-                      </div> */}
-                      {/* <div className="bullet-hover-listing">
-                        <div className="bl-item active" />
-                        <div className="bl-item" />
-                        <div className="bl-item" />
-                      </div> */}
-                    </div>
-                  </div>
-                  <a href="#" className="icon-favorite">
-                    <i className="fa-regular fa-heart"></i>
-                    <FontAwesomeIcon icon={faHeart} className="heart-icon"/> 
-                  </a>
-                  <span className="feature">Dealer Name</span>
-                </div>
-                <div className="listing-item-content">
-                  <div className="listing-top-content">
-                    <h6 className="title">
-                      <a href="#" />
-                      <a href="#">{val.name}</a>
-                    </h6>
-                    <div className="review-wrap">
-                      <div className="rating">
-                        <FontAwesomeIcon icon={faStar} className="Star"/> 
-                        <FontAwesomeIcon icon={faStar} className="Star"/> 
-                        <FontAwesomeIcon icon={faStar} className="Star"/> 
-                        <FontAwesomeIcon icon={faStar} className="Star"/> 
-                        <FontAwesomeIcon icon={faStar} className="Star"/> 
-                      </div>
-                      <span className="review">( 5 Reviews )</span>
-                    </div>
-                    <div className="description">
-                      <ul>
-                        <li className="listing-information fuel">
-                          <FontAwesomeIcon icon={faGasPump} className="Star"/> 
-                          <div className="inner">
-                            <span>Fuel type</span>
-                            <p>Petrol</p>
-                          </div>
-                        </li>
-                        <li className="listing-information size-engine">
-                        <FontAwesomeIcon icon={faMeteor} className="Star"/> 
 
-                          <div className="inner">
-                            <span>Mileage</span>
-                            <p>90 k.m</p>
-                          </div>
-                        </li>
-                        <li className="listing-information transmission">
-                        <FontAwesomeIcon icon={faGears} className="Star"/> 
-                          {/* <i className="icon-gearbox-1" /> */}
-                          <div className="inner">
-                            <span>Transmission</span>
-                            <p>Auto</p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <ul className="list-controller">
-                      <li>
-                        <a href="#">
-                          <i className="icon-heart-1-1" />
-                          <span>Favorite</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i className="icon-shuffle-2-11" />
-                          <span>Compare</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="bottom-price-wrap">
-                    <div className="price-wrap">
-                      <p className="price">$489</p>
-                      <p className="price-sale">$399</p>
-                    </div>
-                    <div className="btn-read-more">
-                      <a className="more-link" href="listing-details.html">
-                        <span>View details</span>
-                        <i className="icon-arrow-right2" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              ))
-            }
-              
-              
             </div>
             {/* <div className="tf-pagination">
               <a className="prev page-numbers" href="#">

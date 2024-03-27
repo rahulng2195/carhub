@@ -7,11 +7,22 @@ import Link from 'next/link'
 import { MDBAccordion, MDBAccordionItem } from 'mdb-react-ui-kit';
 
 const LeftSideBar = () => {
+  // custom accordion
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleClick = (index) => {
+    setCurrentIndex(currentIndex === index ? null : index);
+  };
+
+
+  // date to show on form
   const current_year = new Date();
   const [isChecked, setChecked] = useState(true)
 
   const [CurrentYr, SetCurrentYr] = useState(current_year.getFullYear());
   // const [isOpen, setIsOpen] = useState(false);
+
+  // dealer logo 
   const Cararr = [
     {
       key: 1,
@@ -55,32 +66,20 @@ const LeftSideBar = () => {
     },
   ]
 
-
   return (
     <>
-      <div className="col-md-12 col-lg-3 bg-slate-400 shadow-md rounded-md border-red-200 py-3 md:block hidden">
-        <div className="accordion" id="accordionExample">
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="headingOne">
-              <button
-                className="accordion-button"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne"
-                aria-expanded="true"
-                aria-controls="collapseOne"
-              >
-                Refine Search by Dealers
-              </button>
-            </h2>
-            <div
-              id="collapseOne"
-              className='accordion-collapse collapse show'
-              aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample"
+      <div className="col-md-12 col-lg-3 bg-slate-300 shadow-md rounded-md py-3 md:block hidden">
+        <div className="mb-4">
+          <div key={0} className="border border-gray-200 rounded-md mb-2 bg-white">
+            <button
+              className={`w-full text-black focus:outline-none ${currentIndex === 0 ? 'bg-gray-200' : 'bg-gray-100'
+                }`}
+              onClick={() => handleClick(0)}
             >
-              <div className="accordion-body">
-                <div className='dealers'>
+              Refine Search by Dealers
+            </button>
+            {currentIndex === 0 && (
+              <div className='dealers'>
 
                   <div className='row pb-3 pt-2'>
                     {
@@ -100,34 +99,22 @@ const LeftSideBar = () => {
                       ))
                     }
                   </div>
-                  <div className='sidebar-head text-center text-black pb-3'>
+                  {/* <div className='sidebar-head text-center text-black pb-3'>
                     <Link href="/" className='text-black font-bold pt-5 text-lg'>View More Dealers</Link>
-                  </div>
+                  </div> */}
                 </div>
-              </div>
-            </div>
+            )}
           </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="headingTwo">
-              <button
-                className="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo"
-                aria-expanded="false"
-                aria-controls="collapseTwo"
-              >
-                Refine Filter
-              </button>
-            </h2>
-            <div
-              id="collapseTwo"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingTwo"
-              data-bs-parent="#accordionExample"
+          <div key={1} className="border border-gray-200 rounded-md mb-2 bg-white">
+            <button
+              className={`w-full text-black  ${currentIndex === 1 ? 'bg-gray-100' : 'bg-gray-100'
+                }`}
+              onClick={() => handleClick(1)}
             >
-              <div className="accordion-body">
-                <div className='dealers'>
+              Refine Filter
+            </button>
+            {currentIndex === 1 && (
+              <div className='dealers'>
                   {/* <div className='sidebar-head text-center text-black'>
             <p className='text-black font-bold pt-5 text-lg'>Filter Cars</p>
           </div> */}
@@ -207,7 +194,7 @@ const LeftSideBar = () => {
                             <label htmlFor="Min" className="form-label">
                               Min Year
                             </label>
-                            <input type="text" className="form-control" id="Min" name="min_year" placeholder="1900" />
+                            <input type="text" className="form-control" id="Min" name="min_year" value='1900' placeholder="1900" />
                           </div>
                         </div>
                         <div className="col-md-6">
@@ -215,7 +202,7 @@ const LeftSideBar = () => {
                             <label htmlFor="max" className="form-label">
                               Max Year
                             </label>
-                            <input type="text" className="form-control" id="Max" name="max_year" placeholder={CurrentYr} />
+                            <input type="text" className="form-control" id="Max" name="max_year" value={CurrentYr} placeholder={CurrentYr} />
                           </div>
                         </div>
                         <div className="col-md-6">
@@ -427,16 +414,16 @@ const LeftSideBar = () => {
                               Cylinders
                             </label>
                             <select id="Cylinders" className="form-select" name='cylinder'>
-                            <option option=''>Any</option>
-                            <option option='2'>2</option>
-                            <option option='3'>3</option>
-                            <option option='4'>4</option>
-                            <option option='5'>5</option>
-                            <option option='6'>6</option>
-                            <option option='8'>8</option>
-                            <option option='10'>10</option>
-                            <option option='12'>12</option>
-                            <option option='Not Specified'>Not Specified</option>
+                              <option option=''>Any</option>
+                              <option option='2'>2</option>
+                              <option option='3'>3</option>
+                              <option option='4'>4</option>
+                              <option option='5'>5</option>
+                              <option option='6'>6</option>
+                              <option option='8'>8</option>
+                              <option option='10'>10</option>
+                              <option option='12'>12</option>
+                              <option option='Not Specified'>Not Specified</option>
                             </select>
                           </div>
                         </div>
@@ -446,11 +433,11 @@ const LeftSideBar = () => {
                               Title
                             </label>
                             <select id="Title" className="form-select" name='car_title'>
-                            <option option=''>Any</option>
-                            <option option='Clean'>Clean</option>
-                            <option option='Salvage'>Salvage</option>
-                            <option option='Rebuild'>Rebuild</option>
-                            <option option='Lemon/Manufacturer Buyback'>Lemon/Manufacturer Buyback</option>
+                              <option option=''>Any</option>
+                              <option option='Clean'>Clean</option>
+                              <option option='Salvage'>Salvage</option>
+                              <option option='Rebuild'>Rebuild</option>
+                              <option option='Lemon/Manufacturer Buyback'>Lemon/Manufacturer Buyback</option>
                             </select>
                           </div>
                         </div>
@@ -526,7 +513,7 @@ const LeftSideBar = () => {
                               <option option='8'>8</option>
                               <option option='9'>9</option>
                               <option option='10'>10</option>
-                                
+
                             </select>
                           </div>
                         </div>
@@ -539,30 +526,18 @@ const LeftSideBar = () => {
                     </form>
                   </div>
                 </div>
-              </div>
-            </div>
+            )}
           </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="headingThree">
-              <button
-                className="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseThree"
-                aria-expanded="false"
-                aria-controls="collapseThree"
-              >
-                New Car
-              </button>
-            </h2>
-            <div
-              id="collapseThree"
-              className="accordion-collapse collapse"
-              aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample"
+          <div key={2} className="border border-gray-200 rounded-md mb-2 bg-white">
+            <button
+              className={`w-full text-black focus:outline-none ${currentIndex === 2 ? 'bg-gray-100' : 'bg-gray-100'
+                }`}
+              onClick={() => handleClick(2)}
             >
-              <div className="accordion-body">
-                <div className='dealers'>
+              New Car
+            </button>
+            {currentIndex === 2 && (
+              <div className='dealers'>
                   <span>Select options and see pricing on new vehicles from nearby dealers.</span>
                   <form>
                     <div className='row'>
@@ -602,16 +577,10 @@ const LeftSideBar = () => {
                   </form>
 
                 </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
-
-
-        {/* refine filter  */}
-
-        {/* new car  */}
-
+        
       </div>
     </>
   )
