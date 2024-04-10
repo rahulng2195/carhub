@@ -7,21 +7,45 @@ export async function GET(request) {
             values: [],
         });
 
-      // const car_model = await query({
-      //     query: "SELECT cm_id,  cmo_id, cmo_name, cmo_status FROM car_model where cmo_status = 1",
-      //     values: [],
-      // });
+      const car_model = await query({
+          query: "SELECT cm_id,  cmo_id, cmo_name, cmo_status FROM car_model where cmo_status = 1",
+          values: [],
+      });
 
       const car_distance = await query({
         query: "SELECT cd_id, cd_dist, cd_status FROM car_distance where cd_status = 1",
         values: [],
       });
 
+
+      const fuel_type = await query({
+        query: "SELECT ft_id, ft_type, ft_status FROM fuel_type where ft_status = 1",
+        values: [],
+      });
+
+      const car_dealer = await query({
+        query: "SELECT dealer_id, dname, dimg, dstatus FROM car_dealer where dstatus = 1",
+        values: [],
+      });
+
+      const body_style = await query({
+        query: "SELECT bs_id, bs_name, bs_status FROM body_style where bs_status = 1",
+        values: [],
+      });
+
+      // const car_distance = await query({
+      //   query: "SELECT cd_id, cd_dist, cd_status FROM car_distance where cd_status = 1",
+      //   values: [],
+      // });
+
         return new Response(JSON.stringify({
             status: 200,
             car_make: car_make,
             car_distance: car_distance,
-            // car_model: car_model,
+            car_model: car_model, 
+            fuel_type: fuel_type, 
+            car_dealer: car_dealer, 
+            body_style: body_style, 
         }));
 
     } catch (error) {

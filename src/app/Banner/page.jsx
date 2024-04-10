@@ -16,9 +16,14 @@ export default function Banner() {
   const [CarMakeID, setCarMakeID] = useState([]);
 
 
-  // input validations 
-  const [name, setName] = useState('');
-  const [distanceOptions, setDistanceOptions] = useState('');
+  // form validations 
+  const [formData, setFormData] = useState({
+    zip: '',
+    distance: '',
+    model: '',
+    make: '',
+  });
+  const [errors, setErrors] = useState({}); 
 
   // alert(CarMakeID)
 
@@ -31,7 +36,7 @@ export default function Banner() {
         const CarModelData = response.data.car_model;
         setCarMake(CarmakeData);
         setCarDist(CarDistance);
-        // setCarModel(CarModelData);
+        setCarModel(CarModelData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -42,45 +47,58 @@ export default function Banner() {
 
 
   // alert(CarMakeID);
-  const FetchId = async (e) => {
+  /* const FetchId = async (e) => {
     const makeId = e.target.value;
-    setCarModel([]);
-    try {
-      // console.log(car_model);
-      const id = { params: { cm_id: makeId } };
-      console.log(id.params);
-      // console.log(makeId);
-      const response = await axios.get(car_model, { params: { cm_id: makeId } });
-
-      setCarModel(response.data);
-      // console.log(response.data);
-    } catch (error) {
-      console.error('Model fetch error:', error);
-    }
-
-
     //  get all data and filter as per that 
-    /* console.log('car model state:' + CarModel);
-    const carModelFilter = CarModel.filter((model) => model.cm_id === makeId)
-    console.log('model data:' +carModelFilter);
-    setCarMakeID(carModelFilter); */
-  }
+    const carModelFilter = CarModel.filter((model) => model.cm_id == makeId)
+    // console.log('model data:' + JSON.stringify(carModelFilter));
+    setCarMakeID(carModelFilter);
+  } */
 
-  const UsedCarHandler = async (event) => {
+  const handleChange = (event) => {
+    const check_make_option = event.target.name;
+
+    if(check_make_option === 'make'){
+      const makeId = event.target.value;
+
+      const validateId = CarMake.filter((make) => make.cm_name == makeId)
+      // as we are getting make name from db, using name get id of make 
+      const FetchedMakeId = validateId[0].cm_id;
+      const carModelFilter = CarModel.filter((model) => model.cm_id == FetchedMakeId);
+
+      setCarMakeID(carModelFilter);
+    }
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Basic validation
-    if (!name || !distanceOptions) {
-      alert('Please enter your pincode and select a distance.');
-      return;
+    // Basic validation with error messages
+    const validationErrors = {};
+    if (!formData.zip) {
+      validationErrors.zip = 'postal is required';
+    }
+    if (!formData.distance) {
+      validationErrors.distance = 'distance is required';
     }
 
-    // Build the URL with query parameters
-    const url = `/result?name=${encodeURIComponent(name)}&model=${encodeURIComponent(distanceOptions)}`;
+    setErrors(validationErrors);
 
-    // Navigate to the result page
-    router.push('/CarList' + url);
+    if (Object.keys(validationErrors).length === 0) {
+      // Validation successful, send data
+      const { zip, distance, model, make } = formData;
+      let url = '/CarList' + `?zip=${zip}&distance=${distance}`;
+      if (model) url += `&model=${model}`;
+      if (make) url += `&make=${make}`;
+
+      router.push(url); // Redirect to the next page with URL parameters
+    }
   };
+
 
   return (
     <section className="banner_secs md:h-screen md:relative">
@@ -100,10 +118,6 @@ export default function Banner() {
         />
       </video>
 
-      {/* <div className='aboslute banner_heading top-32 z-10'>
-          <h4 className='text-capitalize'>Find your Next car in a click!</h4>
-      </div> */}
-      {/* form  */}
       <div className="widget-search-car shadow-lg py-3 border-spacing-3 mx-1 md:mx-3 md:absolute">
         <div className="themesflat-container">
           <div className="search-form-widget">
@@ -152,56 +166,6 @@ export default function Banner() {
               </li>
             </ul>
             <div className="tab-content" id="myTabContent">
-              {/* <div
-                  className="tab-pane fade show active"
-                  id="home"
-                  role="tabpanel"
-                  aria-labelledby="home-tab"
-                >
-                  <form method="post" id="search-forms">
-                    <div className="inner-group grid">
-                      <div className="form-group">
-                        <div className="group-select">
-                          <div className="nice-select">
-                            <span className="current">Make</span>
-                            <select >
-                              <option className='form-control'>Select Make</option>
-                              <option >Select Make</option>
-                              <option >Select Make</option>
-                              <option >Select Make</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="group-select">
-                          <div className="nice-select">
-                            <span className="current">Models</span>
-                            <select>
-                              <option className='form-control'>Select Make</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="group-select">
-                          <div className="nice-select">
-                            <span className="current">Models</span>
-                            <select>
-                              <option className='form-control'>Select Make</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <button type="submit" className="button-search-listing bg-red-700">
-                          <i className="icon-search-1" />
-                          Search
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div> */}
 
               {/* used car  */}
               <div
@@ -210,22 +174,23 @@ export default function Banner() {
                 role="tabpanel"
                 aria-labelledby="profile-tab"
               >
-                <form onSubmit={UsedCarHandler} id="search-forms2">
+                <form onSubmit={handleSubmit} id="search-forms2">
                   <div className="inner-group grid">
                     <div className="form-group">
                       <div className="group-select">
                         <div className="nice-select">
                           <span className="current uppercase">Make</span>
-                          <select onChange={FetchId}>
-                            {/* <option value="">Select Make</option> */}
+                          <select id="make" name="make" value={formData.make} onChange={handleChange}>
+                            <option value="">Any</option>
                             {
                               CarMake.length > 0 ? (
                                 CarMake.map(data => (
-                                  <option key={data.cm_id} value={data.cm_id}>{data.cm_name}</option>
+                                  <option key={data.cm_id} value={data.cm_name}>{data.cm_name}</option>
                                 ))
                               ) : (
-                                <option>no data found</option>
-                              )}
+                                ''
+                              )
+                            }
                           </select>
                         </div>
                       </div>
@@ -234,12 +199,12 @@ export default function Banner() {
                       <div className="group-select">
                         <div className="nice-select">
                           <span className="current uppercase">Models</span>
-                          <select>
+                          <select id="model" name="model" value={formData.model} onChange={handleChange}>
                             <option className='form-control'>Select Model</option>
                             {
                               CarMakeID.length > 0 ? (
                                 CarMakeID.map(data => (
-                                  <option key={data.cmo_id} value={data.cmo_id}>{data.cmo_name}</option>
+                                  <option key={data.cmo_id} value={data.cmo_name}>{data.cmo_name}</option>
                                 ))
                               ) : (
                                 ''
@@ -252,20 +217,22 @@ export default function Banner() {
                       <div className="group-select">
                         <div className="nice-select">
                           <span className="current uppercase">Zip/Postal*</span>
-                          <input type='text' className='form-control' name='zip' placeholder='ex:90210' onChange={(e) => setName(e.target.value)} required />
+                          <input type='text' className='form-control' name='zip' placeholder='ex:90210' id="zip" value={formData.zip}
+                            onChange={handleChange} required />
                         </div>
                       </div>
+                      {errors.zip && <p className="error">{errors.zip}</p>}
                     </div>
                     <div className="form-group">
                       <div className="group-select">
                         <div className="nice-select">
                           <span className="current uppercase">Distance*</span>
-                          <select onChange={(e) => setDistanceOptions(e.target.value)} required>
+                          <select id="distance" name="distance" value={formData.distance} onChange={handleChange} required>
                                 <option value=''>Select Distance</option>
                             {
                               CarDist.length > 0 ? (
                                 CarDist.map(data => (
-                                  <option key={data.cd_id} value={data.cd_id} selected={data.cd_id === 4}>{data.cd_dist}</option>
+                                  <option key={data.cd_id} value={data.cd_dist} selected={data.cd_id === 4}>{data.cd_dist}</option>
                                 ))
                               ) : (
                                 <option>no data found</option>
@@ -273,6 +240,7 @@ export default function Banner() {
                           </select>
                         </div>
                       </div>
+                      {errors.distance && <p className="error">{errors.distance}</p>}
                     </div>
                     <div className="form-group">
                       <button type="submit" className="button-search-listing bg-red-700">

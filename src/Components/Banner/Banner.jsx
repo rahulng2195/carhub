@@ -31,7 +31,7 @@ function Banner() {
         const CarModelData = response.data.car_model;
         setCarMake(CarmakeData);
         setCarDist(CarDistance);
-        // setCarModel(CarModelData);
+        setCarModel(CarModelData);
       }catch (error){
         console.error('Error fetching data:', error);
       }
@@ -44,16 +44,14 @@ function Banner() {
    // alert(CarMakeID);
    const FetchId = async(e) => {
      const makeId = e.target.value;
-     setCarModel([]);
+    //  setCarModel([]);
      try{
-      // console.log(car_model);
-      const id = { params: { cm_id: makeId } };
-      console.log(id.params);
-      // console.log(makeId);
-      const response = await axios.get(car_model, { params: { cm_id: makeId } });
-      
-      setCarModel(response.data);
-      // console.log(response.data);
+      const validateId = CarMake.filter((make) => make.cm_name == makeId)
+      // as we are getting make name from db, using name get id of make 
+      const FetchedMakeId = validateId[0].cm_id;
+      const carModelFilter = CarModel.filter((model) => model.cm_id == FetchedMakeId);
+
+      setCarMakeID(carModelFilter);
      }catch(error){
       console.error('Model fetch error:', error);
      }
@@ -224,7 +222,7 @@ function Banner() {
                               {
                                 CarMake.length > 0 ? (
                                   CarMake.map(data => (
-                                    <option key={data.cm_id} value={data.cm_id}>{data.cm_name}</option>
+                                    <option key={data.cm_id} value={data.cm_name}>{data.cm_name}</option>
                                   ))
                                 ) : (
                                   <option>no data found</option>
@@ -242,7 +240,7 @@ function Banner() {
                               {
                                 CarMakeID.length > 0 ? (
                                   CarMakeID.map(data => (
-                                    <option key={data.cmo_id} value={data.cmo_id}>{data.cmo_name}</option>
+                                    <option key={data.cmo_id} value={data.cmo_name}>{data.cmo_name}</option>
                                   ))
                                 ) : (
                                   ''

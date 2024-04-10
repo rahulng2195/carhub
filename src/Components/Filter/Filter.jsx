@@ -1,14 +1,33 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FilterCar } from '@/app/carData'
 import Image from 'next/image'
-import { faHeart, faStar, faGasPump, faMeteor, faGears, faList, faGripVertical } from '@fortawesome/free-solid-svg-icons';
+import {faList, faGripVertical } from '@fortawesome/free-solid-svg-icons';
 import onClickViewListingType from '@/app/main'
 import CarCard from '../CarCard/CarCard';
+import { useSearchParams } from 'next/navigation';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { car_make } from '@/app/Constant';
 
-function Filter() {
+function Filter({urlParams}) {
+  const zipcode = urlParams.zip;
+  const distance = urlParams.distance;
+  const model = urlParams.model;
+  const make = urlParams.make;
+  // alert(make)
+
+  let resultOf = '';
+  if(make){
+    resultOf = make;
+  }else if(make && model){
+    resultOf = `${make} / ${model}`;
+  }else{
+    resultOf = 'Make/Model';
+
+  }
   // grid system on click 
   useEffect(() => {
     onClickViewListingType()
@@ -48,7 +67,7 @@ function Filter() {
                   aria-controls="all"
                   aria-selected="true"
                 >
-                  Result Found Any/Model
+                  Result Found Any {resultOf}
                 </a>
                 {/* <a
                   className=" btn-condition-filter"

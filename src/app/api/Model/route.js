@@ -1,20 +1,24 @@
 import { query } from "@/lib/db";
 
 export async function GET(request) {
-    const cm_ids = request.query?.cm_id;
+    // const cm_ids = request.query ? .cm_id;
+    console.log('model request:' + JSON.stringify(request));
+    console.log('Model request received:', {
+        method: request // Spread operator for potential filtering (see Security below)
+    });
     try {
-        if (!cm_ids) {
+        /* if (!cm_ids) {
             // Handle missing cm_id
             return new Response(JSON.stringify({
                 status: 400,
                 message: "Missing cm_id parameter",
             }));
-        }
-        
-          const car_model = await query({
+        } */
+
+        const car_model = await query({
             query: "SELECT cmo_id, cm_id, cmo_name, cmo_status FROM car_model WHERE cmo_status = 1 AND cm_id = ?",
-            values: [cm_ids],
-          });
+            values: [1],
+        });
 
         //   return console.log(car);
       

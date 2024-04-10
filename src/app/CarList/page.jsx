@@ -6,13 +6,17 @@ import '../../Components/Banner/bannerForm.css';
 import MobileNav from '@/Components/MobileNav/MobileNav';
 
 const CarList = () => {
-  // const selectRef = useRef(null);
-
-  // useEffect(() => {
-  //   $(document).ready(() => {
-  //     $('select').niceSelect();
-  //   });
-  // }, []);
+   // search parameter from url 
+   const url = new URL(window.location.href); // Create a URL object
+   const searchParams = url.searchParams; // Access search parameters
+  //  log
+   // if(searchParams.length == 0){
+   //   router.push('/page')
+   // }
+   const urlParams = {};
+   for (const [key, value] of searchParams.entries()) {
+     urlParams[key] = value;
+   }
   return (
     // <main className="min-h-screen relative">
     <section className='search_sec'>
@@ -30,8 +34,8 @@ const CarList = () => {
       <div className="widget-car-listing-list">
         <div className="themesflat-container">
           <div className="row car-listing-list">
-            <LeftSideBar/>
-            <Filter />
+            <LeftSideBar urlParams={urlParams}/>
+            <Filter  urlParams={urlParams}/>
           </div>
         </div>
       </div>
