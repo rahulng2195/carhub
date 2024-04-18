@@ -177,13 +177,13 @@ const LeftSideBar = ({urlParams}) => {
       const generateParams = new URLSearchParams(formData); 
       // const { zip, distance, model, make } = formData;
       // console.log(generateParams.toString());
-      const sendData = async (car_make) => {
-        const response =  await axios.get(filterData + car_make);
-      }
-      sendData();
+      // const sendData = async (car_make) => {
+      //   const response =  await axios.get(filterData + car_make);
+      // }
+      // sendData();
       let url = '/CarList' + `?${generateParams.toString()}`;
 
-      //router.push(url); // Redirect to the next page with URL parameters
+      router.push(url); // Redirect to the next page with URL parameters
     }
   };
 
