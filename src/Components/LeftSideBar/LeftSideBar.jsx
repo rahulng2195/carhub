@@ -6,9 +6,15 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { car_make, filterData } from '@/app/Constant';
 
+const initialFormData = {
+  zipcode: '',
+  distance: 'option1',
+  model: 'value1', 
+};
+
 const LeftSideBar = ({urlParams}) => {
   const router = useRouter();
-
+  const [iniformData, setiniFormData] = useState(initialFormData);
   // fetch data from db 
   const [CarMake, setCarMake] = useState([]);
   const [CarDist, setCarDist] = useState([]);
@@ -67,9 +73,9 @@ const LeftSideBar = ({urlParams}) => {
   const last_day = urlParams.last_day;  
 
   // add radio value from url to show checked value 
-// Settransradio(transmission || 'any')
-// Setsaletype(sale_type || 'any')
-// Setforsale(sale_by || 'any')
+  // Settransradio(transmission || 'any')
+  // Setsaletype(sale_type || 'any')
+  // Setforsale(sale_by || 'any')
 
   // date to show on form
   const current_year = new Date();
